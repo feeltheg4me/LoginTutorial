@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LoginTutorial.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ColorPrimary">#CC0033</Color>
+            <Color x:Key="ErrorMessageTextColor">Red</Color>
+
+            <Style x:Key="FormErrorLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="Micro" />
+                <Setter Property="TextColor" Value="Red" />
+                <Setter Property="LineHeight" Value="0.50" />
+            </Style>
+            <Style x:Key="ButtonLogin"  TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#f4808a" />
+                <Setter Property="BorderColor" Value="#f4805a" />
+                <Setter Property="BorderWidth" Value="3" />
+                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="Margin" Value="10,0,10,0" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Text" Value="Login" />
+            </Style>
+            <Style x:Key="ButtonSignUp"  TargetType="Button">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="#ffd1d1" />
+                <Setter Property="BorderWidth" Value="3" />
+                <Setter Property="CornerRadius" Value="60" />
+                <Setter Property="TextColor" Value="#f4808a" />
+                <Setter Property="Margin" Value="10,0,10,0" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Text" Value="Sign Up" />
+            </Style>
+            <Style x:Key="CustomEntry"  TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="PlaceholderColor" Value="White" />
+                <Setter Property="ClearButtonVisibility" Value="WhileEditing" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="ReturnType" Value="Next" />
+            </Style>
+            <Style x:Key="PageTitle"  TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="25" />
+            </Style>
+            <Style x:Key="EntryFrame"  TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BorderColor" Value="White" />
+                <Setter Property="CornerRadius" Value="50" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

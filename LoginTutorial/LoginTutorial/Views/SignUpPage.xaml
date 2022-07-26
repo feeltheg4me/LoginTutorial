@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="LoginTutorial.Views.SignUpPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LoginTutorial"
+    xmlns:local1="clr-namespace:LoginTutorial.Customs"
+    xmlns:local2="clr-namespace:LoginTutorial.ViewModels"
+    Title="Sign Up"
+    BackgroundImageSource="Mountains.jpg"
+    NavigationPage.HasNavigationBar="False">
+
+    <StackLayout>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="25">
+            <StackLayout Grid.Row="4">
+                <Label Style="{StaticResource PageTitle}" Text="Sign Up" />
+                <Frame
+                    Margin="15"
+                    Padding="0"
+                    Style="{StaticResource EntryFrame}">
+                    <Frame
+                        Margin="1"
+                        Padding="25,0,25,0"
+                        HeightRequest="60"
+                        Style="{StaticResource EntryFrame}">
+                        <local1:CustomEntry
+                            x:Name="UserNameEntry"
+                            Placeholder="User Name"
+                            Style="{StaticResource CustomEntry}"
+                            Text="{Binding CurrentUser.UserName}" />
+                    </Frame>
+                </Frame>
+                <Frame
+                    Margin="15"
+                    Padding="0"
+                    Style="{StaticResource EntryFrame}">
+                    <Frame
+                        Margin="1"
+                        Padding="25,0,25,0"
+                        HeightRequest="60"
+                        Style="{StaticResource EntryFrame}">
+                        <local1:CustomEntry
+                            x:Name="PasswordEntry"
+                            Placeholder="Password"
+                            Style="{StaticResource CustomEntry}"
+                            Text="{Binding CurrentUser.Password}" />
+                    </Frame>
+                </Frame>
+                <Frame
+                    Margin="15"
+                    Padding="0"
+                    Style="{StaticResource EntryFrame}">
+                    <Frame
+                        Margin="1"
+                        Padding="25,0,25,0"
+                        HeightRequest="60"
+                        Style="{StaticResource EntryFrame}">
+                        <local1:CustomEntry
+                            x:Name="EmailEntry"
+                            Placeholder="Email"
+                            Style="{StaticResource CustomEntry}"
+                            Text="{Binding CurrentUser.Email}" />
+                    </Frame>
+                </Frame>
+                <Frame
+                    Margin="15"
+                    Padding="0"
+                    Style="{StaticResource EntryFrame}">
+                    <Frame
+                        Margin="1"
+                        Padding="25,0,25,0"
+                        HeightRequest="60"
+                        Style="{StaticResource EntryFrame}">
+                        <local1:CustomEntry
+                            x:Name="PhoneEntry"
+                            Placeholder="Phone"
+                            Style="{StaticResource CustomEntry}"
+                            Text="{Binding CurrentUser.Phone}" />
+                    </Frame>
+                </Frame>
+                <Label
+                    x:Name="LoginMessageLabel"
+                    Margin="100,0,0,0"
+                    IsVisible="{Binding TurnErrorMessage, Mode=OneWay}"
+                    Text="{Binding ErrorMessage}"
+                    TextColor="Red" />
+                <StackLayout>
+                    <Button
+                        x:Name="SingUpButton"
+                        Command="{Binding SignUpCommand}"
+                        Style="{StaticResource ButtonSignUp}" />
+                    <Button
+                        x:Name="GoLoginButton"
+                        Command="{Binding GoLoginCommand}"
+                        Style="{StaticResource ButtonLogin}" />
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+</ContentPage>

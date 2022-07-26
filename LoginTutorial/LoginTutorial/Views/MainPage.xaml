@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="LoginTutorial.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:VM="clr-namespace:LoginTutorial.ViewModels">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding LogoutCommand}" Text="Logout" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <Frame
+            Padding="24"
+            BackgroundColor="#2196F3"
+            CornerRadius="0">
+            <StackLayout>
+                <Label
+                    x:Name="PageTitle"
+                    FontSize="36"
+                    HorizontalTextAlignment="Center"
+                    Text="Welcome to your account!"
+                    TextColor="White" />
+                <Label
+                    x:Name="Username"
+                    FontSize="36"
+                    HorizontalTextAlignment="Center"
+                    TextColor="Red" />
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+
+</ContentPage>
