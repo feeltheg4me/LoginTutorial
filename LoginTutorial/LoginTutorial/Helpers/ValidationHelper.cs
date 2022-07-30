@@ -74,27 +74,21 @@ namespace LoginTutorial.Helpers
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    StringBuilder ErrorsMessageSb = new StringBuilder();
-                    int errorsCount = 0;
                     try
                     {
                         if (model == null) { return; }
                         foreach (var error in errors)
                         {
-                            errorsCount++;
-                            ErrorsMessageSb.AppendLine($"{errorsCount} - " + error.ErrorMessage);
-                            
-                            //var memberName = $"{model.GetType().Name}_{error.MemberNames.FirstOrDefault()}";
-                            //memberName = memberName.Replace(".", "_");
-                            //var errorControlName = $"{memberName}{validationLabelSuffix}";
-                            ////var control = view.FindByName<Label>(errorControlName);
-                            ////if (control != null)
-                            ////{
-                            ////    control.Text = $"{error.ErrorMessage}{Environment.NewLine}";
-                            ////    control.IsVisible = true;
-                            ////}
+                            var memberName = $"{model.GetType().Name}_{error.MemberNames.FirstOrDefault()}";
+                            memberName = memberName.Replace(".", "_");
+                            var errorControlName = $"{memberName}{validationLabelSuffix}";
+                            var control = view.FindByName<Label>(errorControlName);
+                            if (control != null)
+                            {
+                                control.Text = $"{error.ErrorMessage}{Environment.NewLine}";
+                                control.IsVisible = true;
+                            }
                         }
-                        App.Current.MainPage.DisplayAlert($"Errors ({errorsCount})", ErrorsMessageSb.ToString(), "Ok");
                     }
                     catch (Exception)
                     {

@@ -1,66 +1,90 @@
 ﻿using LoginTutorial.Models;
+using LoginTutorial.Views;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace LoginTutorial.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public INavigation navigation;
+        public INavigation navigation { get; set; }
+        public ICommand BackCommand { get; set; }
 
+
+        public BaseViewModel()
+        {
+            BackCommand = new AsyncCommand(Back, allowsMultipleExecutions: false);
+
+        }
+        public bool IsBusy { get; set; }
+        public bool IsForm { get; set; }
+
+        internal event Func<string, Task> DoDisplayAlert;
+
+        internal event Func<BaseViewModel, bool, Task> DoNavigate;
+        public virtual void OnAppearing()
+        {
+        }
+
+        public virtual void OnDisappearing()
+        {
+        }
+        public Task DisplayAlertAsync(string message)
+        {
+            return DoDisplayAlert?.Invoke(message) ?? Task.CompletedTask;
+        }
+        public async Task Back()
+        {
+            try
+            {
+                var currentPage = navigation.NavigationStack[navigation.NavigationStack.Count - 1] as BasePage;
+                if (IsForm)
+                {
+                    if (currentPage.IsPageChanged)
+                    {
+                        var action = await App.Current.MainPage.DisplayActionSheet(currentPage.GetType().Name, "Oui", "Non", "Voulez-vous quitter la formulaire ?");
+
+
+                        if (action.Equals("Oui"))
+                        {
+                            await navigation.PopAsync();
+                        }
+                        else
+                        {
+                            await navigation.PopAsync();
+                        }
+                    }
+                    else
+                    {
+                        await navigation.PopAsync();
+                    }
+                }
+            }
+            catch (Exception x)
+            {
+                IsBusy = false;
+                await App.Current.MainPage.DisplayAlert("Exception", x.Message, "ok");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+        public Task NavigateAsync(BaseViewModel vm, bool showModal = false)
+        {
+            return DoNavigate?.Invoke(vm, showModal) ?? Task.CompletedTask;
+        }
+
+        
+
+
+        #region INotify
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private User user;
-        public User User
-        {
-            get { return user; }
-            set { user = value; OnPropertyChanged(); }
-        }
-        private string userName;
-        public string UserName
-        {
-            get { return userName; }
-            set { userName = value; OnPropertyChanged(); }
-        }
-
-        private string password;
-        public string Password
-        {
-            get { return password; }
-            set { password = value; OnPropertyChanged(); }
-        }
-
-        private string errorMessage;
-        public string ErrorMessage
-        {
-            get { return errorMessage; }
-            set { errorMessage = value; OnPropertyChanged(); }
-        }
-        private string email;
-
-
-        public string Email
-        {
-            get { return email; }
-            set { email = value; OnPropertyChanged(); }
-        }
-        private string phone;
-        public string Phone
-        {
-            get { return phone; }
-            set { phone = value; OnPropertyChanged(); }
-        }
-
-        private bool turnErrorMessage = false;
-        public bool TurnErrorMessage
-        {
-            get { return turnErrorMessage; }
-            set { turnErrorMessage = value; OnPropertyChanged(); }
-        }
-
-
-
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
@@ -69,6 +93,7 @@ namespace LoginTutorial.ViewModels
                 return;
             }
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        } 
+        #endregion
     }
 }

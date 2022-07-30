@@ -1,9 +1,4 @@
-﻿using LoginTutorial.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,17 +6,14 @@ using Xamarin.Forms.Xaml;
 namespace LoginTutorial.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class LoginPage : BasePage
     {
-        LoginViewModel VM;
         public LoginPage()
         {
-            VM = new LoginViewModel(this.Navigation);
-            BindingContext = VM;
             InitializeComponent();
         }
 
-        
+        // Show password CheckBox
         private void ShowPasswordCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
 
@@ -39,7 +31,7 @@ namespace LoginTutorial.Views
         // Show Password Label Tapped
         private void ShowPassword_Tapped(object sender, EventArgs e)
         {
-            if(ShowPasswordCheckBox.IsChecked)
+            if (ShowPasswordCheckBox.IsChecked)
             {
                 ShowPasswordCheckBox.IsChecked = false;
             }
@@ -50,10 +42,11 @@ namespace LoginTutorial.Views
         }
         protected override void OnAppearing()
         {
+            User_PasswordError.Text = "";
+            User_UserNameError.Text = "";
             base.OnAppearing();
-            PasswordEntry.IsPassword = true;
-            UserNameEntry.Text = "";
-            PasswordEntry.Text = "";        }
+        }
+
 
     }
 }

@@ -1,15 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<local4:BasePage
     x:Class="LoginTutorial.Views.SignUpPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:LoginTutorial"
     xmlns:local1="clr-namespace:LoginTutorial.Customs"
     xmlns:local2="clr-namespace:LoginTutorial.ViewModels"
+    xmlns:local3="clr-namespace:LoginTutorial.Helpers"
+    xmlns:local4="clr-namespace:LoginTutorial.Views"
     Title="Sign Up"
     BackgroundImageSource="Mountains.jpg"
-    NavigationPage.HasNavigationBar="False">
-
+    IsForm="{Binding IsForm}">
+    <local4:BasePage.BindingContext>
+        <local2:UserViewModel />
+    </local4:BasePage.BindingContext>
+    <NavigationPage.TitleView>
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            Orientation="Horizontal"
+            Spacing="5"
+            VerticalOptions="StartAndExpand">
+            <Image
+                x:Name="Back"
+                HeightRequest="25"
+                HorizontalOptions="Start"
+                Source="ToolbarBack.png"
+                VerticalOptions="Center"
+                WidthRequest="25">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+    </NavigationPage.TitleView>
     <StackLayout>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="25">
             <StackLayout Grid.Row="4">
@@ -30,6 +53,11 @@
                             Text="{Binding CurrentUser.UserName}" />
                     </Frame>
                 </Frame>
+                <Label
+                    x:Name="User_UserNameError"
+                    IsVisible="false"
+                    Style="{StaticResource FormErrorLabel}"
+                    Text="User_UserNameError" />
                 <Frame
                     Margin="15"
                     Padding="0"
@@ -46,6 +74,12 @@
                             Text="{Binding CurrentUser.Password}" />
                     </Frame>
                 </Frame>
+                <Label
+                    x:Name="User_PasswordError"
+                    IsVisible="false"
+                    Style="{StaticResource FormErrorLabel}"
+                    Text="User_PasswordError" />
+
                 <Frame
                     Margin="15"
                     Padding="0"
@@ -62,6 +96,12 @@
                             Text="{Binding CurrentUser.Email}" />
                     </Frame>
                 </Frame>
+                <Label
+                    x:Name="User_EmailError"
+                    Margin="120,0,0,0"
+                    IsVisible="false"
+                    Style="{StaticResource FormErrorLabel}"
+                    Text="User_EmailError" />
                 <Frame
                     Margin="15"
                     Padding="0"
@@ -79,11 +119,16 @@
                     </Frame>
                 </Frame>
                 <Label
-                    x:Name="LoginMessageLabel"
-                    Margin="100,0,0,0"
+                    x:Name="User_PhoneError"
+                    Margin="110,0,0,0"
+                    IsVisible="false"
+                    Style="{StaticResource FormErrorLabel}"
+                    Text="User_PhoneError" />
+                <Label
+                    x:Name="SignUpErrorLabel"
                     IsVisible="{Binding TurnErrorMessage, Mode=OneWay}"
-                    Text="{Binding ErrorMessage}"
-                    TextColor="Red" />
+                    Style="{StaticResource FormErrorLabel}"
+                    Text="{Binding ErrorMessage}" />
                 <StackLayout>
                     <Button
                         x:Name="SingUpButton"
@@ -97,4 +142,4 @@
             </StackLayout>
         </Grid>
     </StackLayout>
-</ContentPage>
+</local4:BasePage>
